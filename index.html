@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" assets="width=device-width, initial-scale=1.0">
+      <title>Hotels | listing</title>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="assets/css/style.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.4-build.3588/angular.min.js"></script>
+   </head>
+
+   <body>
+
+
+  <div class="hotels-page" ng-app="hotel-website" ng-controller="HotelController">
+     
+<!--#region search-and-filter  -->
+          <section class="search-and-filter">
+            <div class="first-row">
+               <div class="first-col">
+                  <span class="fa fa-search"></span>
+                  <input type="text" placeholder="Champs Elysees, Paris" ng-model="search.city">
+               </div>
+               <div class="second-col">
+                  <input type="submit" value="Search">
+               </div>
+            </div>
+            <div class="second-row">
+               <div class="col first-col">
+                  <i class="fa fa-calendar"></i>
+                  <input id="checkInDate" ng-model="checkInDate" placeholder="Check-in">
+               </div>
+               <div class="col second-col">
+                  <i class="fa fa-calendar"></i>
+                  <input id="checkOutDate" ng-model="checkOutDate" placeholder="Check-out" >
+               </div>
+               <div class="col">
+                  <i class="fa fa-users"></i>
+                  <select name="" id="">
+                     <option value="" ng-repeat="room in Rooms">{{room.name}}</option>
+                  </select>
+               </div>
+            </div>
+            <div class="third-row">
+               <div class="col first-col">
+                  <div class="label">
+                     <span>Price</span>
+                     <span>max {{max | currency}}</span>
+                  </div>
+                  <!-- Το max του input να γίνει {{max}} -->
+                  <input type="range" ng-model="max" min="0" max="3000" >
+               </div>
+               <div class="col">
+                  <div class="label">
+                     Property Type
+                  </div>
+                  <select name="" id="" ng-model="search.rating">
+                     <option value="" selected>All</option>
+                     <option value="1">⭐</option>
+                     <option value="2">⭐⭐</option>
+                     <option value="3">⭐⭐⭐</option>
+                     <option value="4">⭐⭐⭐⭐</option>
+                     <option value="5">⭐⭐⭐⭐⭐</option>
+                  </select>
+               </div>
+               <div class="col">
+                  <div class="label">
+                     Guest rating
+                  </div>
+                  <select name="" id="">
+                     <option value="">Not implemented</option>
+                  </select>
+               </div>
+               <div class="col">
+                  <div class="label">
+                     Hotel location
+                  </div>
+                  <select name="" id="" ng-model="search.city">
+                     <option value="">All</option>
+                     <option value="{{x}}" ng-repeat="x in cities">{{x}}</option>
+                  </select>
+               </div>
+               <div class="col">
+                  <div class="label">
+                     More filters
+                  </div>
+                  <select name="" id="" ng-model="search.filters" >
+                     <option value="">All</option>
+                     <option value="{{x}}" ng-repeat="x in filtra">{{x}}</option>
+                  </select>
+               </div>
+            </div>
+         </section>
+   
+     <!--#endregion -->
+  
+<!--#region map-and-sort  -->
+<section class="map-and-sort">
+   <div class="map">
+      <!-- ΝΑ ΤΟ ΠΑΡΩ ΑΠΟ ΤΟ JSON και να αλλάζει on mouseover-->
+      <iframe width="150" height="60"
+         src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d83998.94722687619!2d2.277019841665155!3d48.8588377391234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sgr!4v1554987763683!5m2!1sen!2sgr">
+      </iframe>
+   </div>
+   <div class="sorting">
+      <strong>Sort by </strong>                
+      <select name="" id="" ng-model="sortColumn">
+         <option value="hotelName">Hotel name <small>(a &rarr; z)</small></option>
+         <option value="-hotelName">Hotel name <small>(z &rarr; a)</small></option>
+         <option value="city">City <small>(a &rarr; z)</small></option>
+         <option value="-city">City <small>(z &rarr; a)</small></option>
+         <option value="price">Price <small>(Lowest first)</small></option>
+         <option value="-price">Price <small>(Highest first)</small></option>
+      </select>
+      <span class="info-icon">i</span>
+   </div>
+</section>
+<!--#endregion  -->
+
+<!--#region listing-hotels  -->
+<section class="listing-hotels">
+   <div ng-repeat="hotel in Hotels | filter:filterPrice | filter:search:strict | orderBy:sortColumn"
+      class="hotel-card">
+      <!-- Επειδή οι φωτογραφίες που έρχονται δεν έχουν ίδιο μέγεθος, για να μην παραμορφωθούν, θα εμφανίζω ενα μέρος της εικόνας, εστιάζοντας στο κέντρο -->
+      <div class="photo" style="background:url({{hotel.thumbnail}}); background-position: center;">
+         <i class="fa fa-heart"></i>
+         <span>1/30</span>
+      </div>
+      <div class="details">
+         <h3>{{hotel.hotelName}}</h3>
+         <div class="rating" ng-init="asteria=hotel.rating" style="display: inline;">
+            <!-- Μπακαλίστικος τρόπος -->
+            <div ng-switch on="asteria">
+               <span ng-switch-when="1">
+               <span class="fa fa-star"></span>
+               </span>
+               <span ng-switch-when="2">
+               <span class="fa fa-star"></span>
+               <span class="fa fa-star"></span>
+               </span>
+               <span ng-switch-when="3">
+               <span class="fa fa-star"></span>
+               <span class="fa fa-star"></span>
+               <span class="fa fa-star"></span>
+               </span>
+               <span ng-switch-when="4">
+               <span class="fa fa-star"></span>
+               <span class="fa fa-star"></span>
+               <span class="fa fa-star"></span>
+               <span class="fa fa-star"></span>
+               </span>
+               <span ng-switch-when="5">
+               <span class="fa fa-star"></span>
+               <span class="fa fa-star"></span>
+               <span class="fa fa-star"></span>
+               <span class="fa fa-star"></span>
+               <span class="fa fa-star"></span>
+               </span>
+               Hotel
+            </div>
+            <!-- <ng-container *ngFor="let i of [].constructor(5)"> test  </ng-container>
+               <i class="fa fa-star">{{hotel.rating}}</i> -->
+            <!-- {{  | date:'longDate'}} -->
+         </div>
+         <div class="location">
+            {{hotel.city}}
+         </div>
+         <div class="reviews">
+            <span class="total">{{ hotel.guestrating | number : 1 }}</span>
+            <b>{{ hotel.ratings.text }}</b>
+            <small>( 1736 reviews )</small>
+         </div>
+         <div class="location-reviews">
+            Excellent location <small>({{hotel.ratings.no | number : 1 }}/10)</small>
+         </div>
+      </div>
+      <div class="third-party-prices">
+         <div class="sites-and-prices">
+            <div class="highlited">
+               Hotel website
+               <strong>$706</strong>
+            </div>
+            <div>
+               Hotel website
+               <strong>$706</strong>
+            </div>
+            <div>
+               Hotel website
+               <strong>$706</strong>
+            </div>
+         </div>
+         <div class="more-deals">
+            <strong>More deals from</strong>
+            <strong>$575</strong>
+         </div>
+      </div>
+      <div class="call-to-action">
+         <div class="price">
+            <div class="before-discount">
+               HotelPower.com 
+               <strong><s>$ {{( hotel.price * 1.1) | number : 0}}</s></strong>
+            </div>
+            <div class="after-discount">
+               Travelocity 
+               <strong>${{hotel.price}}</strong>
+               <div class="total">
+                  3 nights for <strong>
+                  ${{ 3 * hotel.price}}
+                  </strong>
+               </div>
+               <div class="usp">
+                  <span ng-repeat="extra in hotel.filters">{{extra.name}}
+                  </span>
+               </div>
+            </div>
+            <div class="button">
+               <a href="#">View Deal</a>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<!--#endregion-->
+
+      </div> <!--end of hotels-page-->
+
+      <script src="assets/js/myScripts.js"></script>
+   </body>
+</html>

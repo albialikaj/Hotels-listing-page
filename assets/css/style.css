@@ -1,0 +1,383 @@
+body{
+    background: #ebeced;
+    font-family: sans-serif;
+}
+
+option{
+    background-color: #ebeced;
+    color:#37454d;
+}
+/* Το παρακάτω είναι κάτι σαν reset */
+input, select, body, h1,h2,h3,h4,h5,h6 {
+    border:none;
+    background: none;
+    margin: 0px;
+    padding: 0px;
+}
+textarea:focus, input:focus{
+    outline: none;
+}
+
+/* Είναι το βασικό div μέσα στο οποίο θα εμφολεύσω όλα τα υπόλοιπα elements */
+.hotels-page {
+    width:950px;
+    margin:auto;
+}
+
+/* === HEADER SECTION */
+/*#region search-and-filter*/
+.hotels-page .search-and-filter{
+    background-color: #37454d;
+    color:#6c767c;    
+}
+.hotels-page .search-and-filter .fa{
+    padding:0px 15px
+}
+.hotels-page .search-and-filter .first-row{
+    display: flex;
+    padding: 5px 10px;
+    height: 45px;      
+}
+.hotels-page .search-and-filter .first-row .first-col{
+    width:85%;             
+    background: white;
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.hotels-page .search-and-filter .first-row .first-col input{
+    height: 100%;
+    width: 100%;  
+    line-height: 30px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 9px;
+}
+.hotels-page .search-and-filter .first-row .second-col{
+    width:15%;             
+    background: #007fad;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.hotels-page .search-and-filter .first-row .second-col input{
+    cursor: pointer;
+    color:#fff;
+    width: 100%;
+    height:100%;
+    background: none;
+}
+.hotels-page .search-and-filter .second-row {
+    display: flex;
+    padding: 5px 10px;
+    height: 45px;  
+    justify-content: space-between;
+}  
+.hotels-page .search-and-filter .second-row .col {
+    width:32%;              
+    background: white;
+    display: flex;
+    align-items: center;
+    border-radius:2px;
+}
+.hotels-page .search-and-filter .second-row .col input{
+    width:100%;
+    height: 100%;
+}
+.hotels-page .search-and-filter .second-row .col select{
+    width:100%;
+    height: 100%;
+    cursor:pointer;
+}
+.hotels-page .search-and-filter .second-row .first-col{
+    border-left:solid #007fad 7px;
+}
+.hotels-page .search-and-filter .second-row .second-col{
+    border-left:solid #f48f00 7px;
+}
+.hotels-page .search-and-filter .third-row {
+    display: flex;
+    padding: 10px 10px;
+    height: 45px;  
+    font-size:15px;
+    justify-content: space-between;
+}
+.hotels-page .search-and-filter .third-row select {
+    color:#fff;
+    width: 100%;
+    cursor:pointer;
+}
+.hotels-page .search-and-filter .third-row .col{
+    border-right: solid 1px #d2d2d2;
+    padding-right:15px;
+    min-width: 150px;
+}
+.hotels-page .search-and-filter .third-row .col:last-child{
+    border:none;
+}
+.hotels-page .search-and-filter .third-row .col .label{
+    text-align: left;
+    color:#d2d2d2;
+}
+.hotels-page .search-and-filter .third-row.first-col{
+    width: 225px;
+}
+.hotels-page .search-and-filter .third-row .first-col .label{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom:15px;
+}
+.hotels-page .search-and-filter .third-row .first-col input{
+    width:100%;
+    background: #007fad;
+    -webkit-appearance: none;
+    height: 5px;
+    border-radius: 2px;
+    display: flex;
+    cursor: pointer;
+}
+/* ΒΟΉΘΕΙΑ ΑΠΟ http://doodlenerd.com/html-control/css-input-range-generator */
+.hotels-page .search-and-filter .third-row  input[type=range]::-webkit-slider-thumb {
+    height: 21px;
+    width: 21px;
+    border-radius: 50px;
+    background: #d2d2d2;
+    cursor: pointer;
+    -webkit-appearance: none;  
+  }
+  .third-row .col:last-child{
+    border:none;
+}
+/*#endregion search-and-filter*/
+
+/* MAP AND INFO */
+/*#region map-and-sort*/
+.hotels-page .map-and-sort{
+    display: flex;
+    justify-content: space-between;
+    padding-top:15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.hotels-page .map-and-sort .map iframe{
+    border:solid 2px #fff;
+}
+.hotels-page .map-and-sort .sorting{
+    color: #37454d;
+    display: flex;
+    align-items: center;
+}
+.hotels-page .map-and-sort select{
+    width: 250px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    border:solid 1px #9ba2a6;
+    padding:3px;
+    cursor:pointer;
+    height:45px;
+    margin:0px 10px;
+}
+.hotels-page .map-and-sort .sorting  .info-icon{
+    width: 27px;
+    height: 27px;
+    line-height: 27px;
+    text-align: center;
+    background-color: #9ba2a6;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 15px;position: relative;
+    cursor:pointer;
+}
+
+.hotels-page .map-and-sort .sorting  .info-icon:hover:after{
+content:'Info content in css';
+position: absolute;
+width:120px;
+top:-15px;
+left:50px;
+background-color:  #9ba2a6;
+border-radius:7px;
+color:#ffffff;
+}
+/*#endregion map-and-sort*/
+
+/* SECTION ΠΟΥ ΕΜΦΑΝΊΖΟΝΤΑΙ ΤΑ ΞΕΝΟΔΟΧΕΊΑ */
+/*#region listing-hotels*/
+.hotels-page .listing-hotels {
+    padding:0px 10px;
+    margin-bottom:120px;
+}
+.hotels-page .listing-hotels  .hotel-card {
+    display: flex;
+    margin-top:15px;
+    height: 224px;
+    background-color: #fff;
+    box-shadow: 0px 0px 8px #6d6d6d77;
+    border-radius: 3px;
+}
+.hotels-page .listing-hotels  .hotel-card .photo {
+    width:230px;
+    position: relative;
+    padding:2px;  
+    background: url('');
+    background-size: cover!important; 
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    overflow:hidden;
+}
+.hotels-page .listing-hotels  .hotel-card .photo span{
+    position: absolute;
+    bottom:15px;
+    left:15px;
+    background: rgba(0,0,0, .3);
+    padding:3px;
+    border-radius: 3px;
+    color:#fff;
+    letter-spacing: 1.1px;
+    font-size: 12px;   
+}
+.hotels-page .listing-hotels  .hotel-card .photo .fa{
+    color: rgba(0,0,0, .5);
+    position: absolute;
+    top:15px;
+    left:15px;
+}
+.hotels-page .listing-hotels  .hotel-card .details{
+    margin-top: 15px;
+    color: #37454d;
+    padding:0px 15px;
+    width:340px;
+ }
+/* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_star_rating */
+.hotels-page .listing-hotels  .hotel-card .details .rating .fa-star{
+    font-size: 14px;
+    color: #f6ab3f;
+}
+.hotels-page .listing-hotels  .hotel-card .details .location{
+    margin-top:10px;
+}
+.hotels-page .listing-hotels  .hotel-card .details .reviews {
+    margin-top:20px;
+    margin-bottom:20px;
+}
+.hotels-page .listing-hotels  .hotel-card .details .reviews .total{
+    background: green;
+    font-weight: bold;
+    color:#fff;
+    padding:3px;
+    border-radius: 3px;
+}
+.hotels-page .listing-hotels  .hotel-card .details .location-reviews{
+    margin-top:10px;
+}
+.listing-hotels .hotel-card .third-party-prices {
+    padding:5px 10px 5px 10px;
+    border-right:solid 1px #ebeced; 
+    border-left:solid 1px #ebeced;
+    width:125px;
+    text-align: center;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-around;
+}
+.hotels-page .listing-hotels .hotel-card .third-party-prices .sites-and-prices{
+    color:#6c767c;
+    height:155px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-around;
+    border-bottom:solid 1px #ebeced;
+}
+.hotels-page .listing-hotels .hotel-card .third-party-prices .sites-and-prices div strong{
+    display: block;
+}
+.hotels-page .listing-hotels .hotel-card .third-party-prices .sites-and-prices .highlited{
+    padding:5px;
+    background:#e5f2f6;
+    color:#007fad;
+}
+.hotels-page .listing-hotels .hotel-card .third-party-prices .more-deals {  
+    font-size: 14px;
+    color:#37454d;
+}
+.hotels-page .listing-hotels .hotel-card .call-to-action{
+    position: relative;
+}
+.hotels-page .listing-hotels .hotel-card .call-to-action .price{
+    padding:10px;
+    display: flex;
+    flex-direction: column; 
+    height:150px;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+}
+.hotels-page .listing-hotels .hotel-card .call-to-action .price .before-discount {
+    font-size:14px;
+    color:#c94a3a;
+}
+.hotels-page .listing-hotels .hotel-card .call-to-action .price .before-discount strong{
+    font-size: 18px;
+    line-height: 30px;
+    display: block;
+}
+.hotels-page .listing-hotels .hotel-card .call-to-action .price .after-discount {
+font-size:14px;
+color:green;
+}
+.hotels-page .listing-hotels .hotel-card .call-to-action .price .after-discount strong{
+display: block;
+font-size: 21px;
+line-height: 30px;
+}
+.hotels-page .listing-hotels .hotel-card .call-to-action .price .total{
+    font-size:14px;
+   color: black;
+}
+.hotels-page .listing-hotels .hotel-card .call-to-action .price .total strong{
+    color:green;
+    font-size:14px;
+    display: inline;
+}
+.usp {
+    border:solid 1px green;
+    width:200px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius:3px;
+}
+.usp span:after{
+    content: ', ';
+}
+.usp  span:last-child:after{
+    content:'';
+}
+.hotels-page .listing-hotels .hotel-card .call-to-action .button a{
+    background: #428500;
+    position: absolute;
+    bottom:10px;
+    left:10px; 
+    right:10px;
+    padding:10px;
+    text-align: center; 
+    color:#ffffff;
+    text-decoration: none;
+    border-radius:3px; 
+    font-weight:bold;
+    transition: 0.3s;
+}
+.hotels-page .listing-hotels .hotel-card .call-to-action .button a:hover{
+    color: #428500;
+    background: #ffffff;
+    border:solid 1px #428500;
+}
+.hotels-page .listing-hotels .hotel-card .call-to-action .button a:after {
+    content:'›';
+    position:absolute;
+    right:10px;      
+}
+/*#endregion listing-hotels*/
+
+
+
